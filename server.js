@@ -14,6 +14,11 @@ app.use(cors());
 //Routes
 app.use('/filmes', filmesRoutes);
 
+//Rota Inicial
+app.get('/', (req, res) => {
+    res.redirect('/filmes')
+})
+
 // BD
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {

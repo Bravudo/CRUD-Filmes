@@ -1,119 +1,93 @@
-const Filme = require('../models/filme');
+const Filme = require('../models/Filme');
 
-// @desc    Obter todos os filmes
-// @route   GET /filmes
-// @access  Public
-exports.getFilmes = async (req, res, next) => {
-  try {
-    const filmes = await Filme.find();
-    res.status(200).json({
-      success: true,
-      count: filmes.length,
-      data: filmes
-    });
-  } catch (err) {
-    res.status(500).json({
-      success: false,
-      error: 'Erro no servidor'
-    });
-  }
-};
-
-// @desc    Obter um filme
-// @route   GET /filmes/:id
-// @access  Public
-exports.getFilme = async (req, res, next) => {
-  try {
-    const filme = await Filme.findById(req.params.id);
-
-    if (!filme) {
-      return res.status(404).json({
-        success: false,
-        error: 'Filme não encontrado'
-      });
+// Lista todos os filmes (VIEW)
+exports.getFilmes = async (req, res) => {
+    try {
+        const filmes = await Filme.find().sort({ createdAt: -1 });
+        res.render('filmes/index', { 
+            title: 'Catálogo de Filmes',
+            filmes 
+        });
+    } catch (err) {
+        res.render('error', { error: err.message });
     }
-
-    res.status(200).json({
-      success: true,
-      data: filme
-    });
-  } catch (err) {
-    res.status(500).json({
-      success: false,
-      error: 'Erro no servidor'
-    });
-  }
 };
 
-// @desc    Criar filme
-// @route   POST /filmes
-// @access  Public
-exports.createFilme = async (req, res, next) => {
-  try {
-    const filme = await Filme.create(req.body);
-    res.status(201).json({
-      success: true,
-      data: filme
-    });
-  } catch (err) {
-    res.status(400).json({
-      success: false,
-      error: err.message
-    });
-  }
-};
-
-// @desc    Atualizar filme
-// @route   PUT /filmes/:id
-// @access  Public
-exports.updateFilme = async (req, res, next) => {
-  try {
-    const filme = await Filme.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true
-    });
-
-    if (!filme) {
-      return res.status(404).json({
-        success: false,
-        error: 'Filme não encontrado'
-      });
+// Mostra um filme específico (VIEW)
+exports.getFilme = async (req, res) => {
+    try {
+        const filme = await Filme.findById(req.params.id);
+        if (!filme) {
+            return res.status(404).render('error', { error: 'Filme não encontrado' });
+        }
+        res.render('filmes/show', { 
+            title: filme.titulo,
+            filme 
+        });
+    } catch (err) {
+        res.render('error', { error: err.message });
     }
-
-    res.status(200).json({
-      success: true,
-      data: filme
-    });
-  } catch (err) {
-    res.status(400).json({
-      success: false,
-      error: err.message
-    });
-  }
 };
 
-// @desc    Deletar filme
-// @route   DELETE /filmes/:id
-// @access  Public
-exports.deleteFilme = async (req, res, next) => {
-  try {
-    const filme = await Filme.findByIdAndDelete(req.params.id);
+// Formulário para adicionar novo filme (VIEW)
+exports.newFilme = (req, res) => {
+    res.render('filmes/new', { 
+        title: 'Adicionar Novo Filme' 
+    });
+};
 
-    if (!filme) {
-      return res.status(404).json({
-        success: false,
-        error: 'Filme não encontrado'
-      });
+// Formulário para editar filme (VIEW)
+exports.editFilme = async (req, res) => {
+    try {
+        const filme = await Filme.findById(req.params.id);
+        if (!filme) {
+            return res.status(404).render('error', { error: 'Filme não encontrado' });
+        }
+        res.render('filmes/edit', { 
+            title: `Editar: ${filme.titulo}`,
+            filme 
+        });
+    } catch (err) {
+        res.render('error', { error: err.message });
     }
+};
 
-    res.status(200).json({
-      success: true,
-      data: {}
-    });
-  } catch (err) {
-    res.status(500).json({
-      success: false,
-      error: 'Erro no servidor'
-    });
-  }
+// Cria um novo filme (API)
+exports.createFilme = async (req, res) => {
+    try {
+        const filme = await Filme.create(req.body);
+        res.redirect(`/filmes/${filme._id}`);
+    } catch (err) {
+        res.render('filmes/new', { 
+            title: 'Adicionar Novo Filme',
+            error: err.message 
+        });
+    }
+};
+
+// Atualiza um filme (API)
+exports.updateFilme = async (req, res) => {
+    try {
+        const filme = await Filme.findByIdAndUpdate(req.params.id, req.body, { 
+            new: true,
+            runValidators: true 
+        });
+        res.redirect(`/filmes/${filme._id}`);
+    } catch (err) {
+        res.render('filmes/edit', { 
+            title: 'Editar Filme',
+            error: err.message,
+            filme: req.body 
+        });
+    }
+};
+
+// Remove um filme (API)
+exports.deleteFilme = async (req, res) => {
+    try {
+        await Filme.findByIdAndDelete(req.params.id);
+        res.redirect('/filmes');
+    } catch (err) {
+        res.render('error', { error: err.message });
+    }
 };

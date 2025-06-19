@@ -1,0 +1,21 @@
+.header_main_container{
+    position: absolute;
+    width: 100%;
+    padding: 0px 10px;
+    background-color: aqua;
+}
+
+.header_container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: clamp(0px, 100%, 1920px);
+    background-color: red;
+}
+
+.left,.center,.right{
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
