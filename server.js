@@ -21,9 +21,9 @@ app.get('/', (req, res) => {
 
 // BD
 mongoose.connect(process.env.MONGO_URI)
-    .then(() => {
-        console.log('Mongo DB Online');
-
+.then(() => {
+    console.log('Mongo DB Online');
+    
         const PORT = process.env.PORT || 3000;
         app.listen(PORT, () => {
             console.log(`Rodando na Porta: ${PORT}`);
@@ -31,8 +31,12 @@ mongoose.connect(process.env.MONGO_URI)
     })
     .catch(err => console.log(err));
 
-//views
+// Configuração do EJS e layouts
+const expressLayouts = require('express-ejs-layouts');
+app.use(expressLayouts);
+app.set('layout', './layouts/main'); // Corrigido!
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
-
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Configurar EJS e layouts

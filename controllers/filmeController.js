@@ -2,16 +2,13 @@ const Filme = require('../models/Filme');
 
 // Lista todos os filmes (VIEW)
 exports.getFilmes = async (req, res) => {
-    try {
-        const filmes = await Filme.find().sort({ createdAt: -1 });
-        res.render('filmes/index', { 
-            title: 'Catálogo de Filmes',
-            filmes 
-        });
-    } catch (err) {
-        res.render('error', { error: err.message });
-    }
+    const filmes = await Filme.find();
+    res.render('filmes/index', { 
+        title: 'FilmesNET', // Passa o título para o head.ejs
+        filmes: filmes       // Passa a lista de filmes
+    });
 };
+
 
 // Mostra um filme específico (VIEW)
 exports.getFilme = async (req, res) => {

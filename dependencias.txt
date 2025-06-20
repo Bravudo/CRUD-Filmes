@@ -1,3 +1,4 @@
 npm install express mongoose dotenv cors
 npm install --save-dev nodemon
 npm install ejs
+npm install express-ejs-layouts

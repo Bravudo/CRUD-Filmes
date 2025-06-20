@@ -1,16 +1,29 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+}
+
+
+
+
+
+/*---------*/
+/* Header */
 .header_main_container{
     position: absolute;
     width: 100%;
-    padding: 0px 10px;
-    background-color: aqua;
+    padding: 5px 0px;
+    background-color: rgb(255, 255, 255);
+    margin: 0 auto;
 }
 
 .header_container{
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    width: clamp(0px, 100%, 1920px);
+    margin: 0 auto;
+    width: clamp(0px, 95vw, 2000px);
+    max-width: 2000px;
     background-color: red;
 }
 
