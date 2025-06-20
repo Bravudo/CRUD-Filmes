@@ -29,8 +29,21 @@ exports.getFilme = async (req, res) => {
 // Formulário para adicionar novo filme (VIEW)
 exports.newFilme = (req, res) => {
     res.render('filmes/new', { 
-        title: 'Adicionar Novo Filme' 
+        title: 'Adicionar Novo Filme',
+        filme:{}
     });
+};
+// Cria um novo filme (API)
+exports.createFilme = async (req, res) => {
+    try {
+        const filme = await Filme.create(req.body);
+        res.redirect(`/filmes/${filme._id}`);
+    } catch (err) {
+        res.render('filmes/new', { 
+            title: 'Adicionar Novo Filme',
+            error: err.message 
+        });
+    }
 };
 
 // Formulário para editar filme (VIEW)
@@ -49,18 +62,6 @@ exports.editFilme = async (req, res) => {
     }
 };
 
-// Cria um novo filme (API)
-exports.createFilme = async (req, res) => {
-    try {
-        const filme = await Filme.create(req.body);
-        res.redirect(`/filmes/${filme._id}`);
-    } catch (err) {
-        res.render('filmes/new', { 
-            title: 'Adicionar Novo Filme',
-            error: err.message 
-        });
-    }
-};
 
 // Atualiza um filme (API)
 exports.updateFilme = async (req, res) => {

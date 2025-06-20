@@ -6,6 +6,10 @@
 
 :root{
     /*Colors Combo*/
+
+    --primary-color: #ffdb89;
+    --secondary-color: #030303;
+    --terceary-color: #2c2c2e;
     /*Kit 1*/
     --gradient-kit1-color-1: #ffffff;
     --gradient-kit1-color-2: #977DFF;
@@ -47,7 +51,7 @@
     margin: 0 auto;
 
     
-    background-color: white;
+    background-color: var(--secondary-color);
 }
 
 .header_container{
@@ -69,59 +73,45 @@
 }
 
 /*Left*/
+.left h1{
+    color: var(--primary-color);
+    font-size: 2rem;
+}
+
 .left a{
+    white-space: nowrap;
     position: relative;
     display: inline-block;
     text-decoration: none;
     padding:var(--link-button-padding);
 
-    color: var(--gradient-kit3-color-1);
-    background-color: white !important;
+    color: var(--primary-color);
+    border: solid 2px var(--primary-color);
     border-radius: var(--link-button-border-radius);
+    font-size: 1rem;
     
-    z-index: 1;
-    border: 2px solid transparent;
-    transition: all 0.2s ease-out;
-}
 
-.left a::before{
-    content: '';
-    position:absolute;
-    background: linear-gradient(to right,
-    var(--gradient-kit2-color-1) 0%,
-    var(--gradient-kit2-color-2) 40%,
-    var(--gradient-kit2-color-3) 100%);
-    width: calc(100% + 4px);
-    height: calc(100% + 4px);
-    top: -2px;
-    left: -2px;
-    border-radius: var(--link-button-border-radius);
-    box-sizing: border-box;
-
-    padding: 1.9px;
-    /*Mascara o proprio elemento*/
-    -webkit-mask: 
-    linear-gradient(#fff 0 0) content-box, 
-    linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    /*-----------------------------------------------*/
-    z-index: -2;
+ 
+    transition: all 0.05s ease-out;
 }
 
 .left a:hover{
-    scale: calc(1.03);
-    box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.222);
+    color: var(--secondary-color);
+    background-color: var(--primary-color);
+    
 }
+
 
 
 
 /*Page wrapper*/
 .wrapper_content_container{
+    position: relative;
     margin: 0 auto;
     height: 100vh;
+        margin-top: 50px;
     width: clamp(0px, 100vw, 100vw);
-    background: linear-gradient(to right,
-    var(--gradient-kit2-color-1) 0%,
-    var(--gradient-kit2-color-2) 40%,
-    var(--gradient-kit2-color-3) 100%);
+    background: linear-gradient(to top,
+    var(--secondary-color) 0%,
+    var(--terceary-color) 100%);
 }
