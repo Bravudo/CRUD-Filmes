@@ -7,7 +7,7 @@
 <div class="wrapper_content_container">
     <form action="/filmes" method="POST" class="form_new_movie">
         <div class="form_title">
-            <h1>Adicionar novo Filme</h1>
+            <h1>Crie seu Filme</h1>
         </div>
 
         <!-- Título -->
@@ -42,6 +42,7 @@
                            value="<%= genero %>"
                            <%= selectedGeneros.includes(genero) ? 'checked' : '' %>>
                     <%= genero %>
+                    <div class="genre-background-label"></div>
                 </label>
             <% }); %>
         </div>
