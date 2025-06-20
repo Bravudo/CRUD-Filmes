@@ -1,117 +1,189 @@
-*{
-    box-sizing: border-box;
-    margin: 0;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
 
-:root{
-    /*Colors Combo*/
+    body {
+        display: flex;
+        flex-direction: column;
+        background: linear-gradient(to top,
+                var(--secondary-color) 0%,
+                var(--terceary-color) 100%);
+        background-repeat: no-repeat;
+        height: 100vh;
+    }
 
-    --primary-color: #ffdb89;
-    --secondary-color: #030303;
-    --terceary-color: #2c2c2e;
-    /*Kit 1*/
-    --gradient-kit1-color-1: #ffffff;
-    --gradient-kit1-color-2: #977DFF;
-    /*Kit 2*/
-    --gradient-kit2-color-1: #FFCCF2;
-    --gradient-kit2-color-2: #977DFF;
-    --gradient-kit2-color-3: #0033ff;
-    /*Kit 3*/
-    --gradient-kit3-color-1: #977DFF;
-    --gradient-kit3-color-2: #0033ff;
-    --gradient-kit3-color-3: #0600AF;
-    /*Kit 4*/
-    --gradient-kit4-color-1: #0033ff;
-    --gradient-kit4-color-2: #0600AF;
-    --gradient-kit4-color-3: #00003D;
+    :root {
 
+        /*Colors Combo*/
+        --primary-color: #ffdb89;
+        --secondary-color: #030303;
+        --terceary-color: #2c2c2e;
+        --quaternary-color: #d4c3ba;
 
-    /*Header*/
-    /*Link Buttons*/
-    --link-button-border-radius:10px;
-    --link-button-padding: 10px;
+        /*Header*/
+        /*Link Buttons*/
+        --link-button-border-radius: 10px;
+        --link-button-padding: 10px;
 
-    /*Wrapper-Configs*/
-    --wrapper-max-width: 2000px;
-    --wrapper-padding-content: 20px 40px;
-}
+        /*Wrapper-Configs*/
+        --wrapper-max-width: 2000px;
+        --wrapper-padding-content: 20px 40px;
+    }
 
 
 
 
-/*---------*/
-/* Header */
-.wrapper_header_container{
-    position: absolute;
-    width: 100%;
-    
-    top: 0;
-    left: 0;
-    margin: 0 auto;
+    /*---------*/
+    /* Header */
+    .wrapper_header_container {
+        position: absolute;
+        width: 100%;
 
-    
-    background-color: var(--secondary-color);
-}
+        top: 0;
+        left: 0;
+        margin: 0 auto;
+        background-color: var(--secondary-color);
+    }
 
-.header_container{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 auto;
-    width: clamp(0px, 100vw, var(--wrapper-max-width));
-    max-width: 2000px;
-    padding: 5px 20px;
-}
-/*Header Directions Config*/
-.left,.center,.right{
-    display: flex;
-    align-items: center;
-    position: relative;
-    flex: 1;
-    gap: clamp(10px, 2vw, 10px);
-}
+    .header_container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 auto;
+        width: clamp(0px, 100vw, var(--wrapper-max-width));
+        max-width: 2000px;
+        padding: 5px 20px;
+    }
 
-/*Left*/
-.left h1{
-    color: var(--primary-color);
-    font-size: 2rem;
-}
+    /*Header Directions Config*/
+    .left,
+    .center,
+    .right {
+        display: flex;
+        align-items: center;
 
-.left a{
-    white-space: nowrap;
-    position: relative;
-    display: inline-block;
-    text-decoration: none;
-    padding:var(--link-button-padding);
+        flex: 1;
+        gap: clamp(6px, 2vw, 30px);
+    }
+    /*----*/
+    /*Left*/
+    .logo {
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
 
-    color: var(--primary-color);
-    border: solid 2px var(--primary-color);
-    border-radius: var(--link-button-border-radius);
-    font-size: 1rem;
-    
+    .logo_text{
+        border: none !important;
+        font-size: 2rem;
 
- 
-    transition: all 0.05s ease-out;
-}
+        cursor: pointer;
+        text-decoration: none;
+        color: var(--primary-color);
+        height: auto;
+    }
 
-.left a:hover{
-    color: var(--secondary-color);
-    background-color: var(--primary-color);
-    
-}
+    /* Contêiner dos botões */
+    .redirect_buttons {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+
+    }
+
+    /* Estilo dos links (botões) */
+    .redirect_buttons a {
+        margin: 0 auto;
+        white-space: nowrap;
+        text-decoration: none;
+        padding: var(--link-button-padding);
+        color: var(--primary-color);
+        border: solid 2px var(--primary-color);
+        border-radius: var(--link-button-border-radius);
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.05s ease-out;
+
+        display: inline-flex;
+        align-items: center;
+
+    }
+
+    .redirect_buttons a:hover {
+        color: var(--secondary-color);
+        background-color: var(--primary-color);
+    }
 
 
 
 
-/*Page wrapper*/
-.wrapper_content_container{
-    position: relative;
-    margin: 0 auto;
-    height: 100vh;
+    /*Page wrapper*/
+    .wrapper_content_container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        margin: 0 auto;
+        width: clamp(0px, 100vw, var(--wrapper-max-width));
+        max-width: 2000px;
+        margin-top: 20px;
+        z-index: 1; /*Não tirar. Pode entrar em conflito com o header*/
+    }
+
+
+
+
+/*----------------------------------*/
+/*ADICIONAR FILME                  */
+
+    /*Form Filme*/
+    .form_new_movie {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+
+        width: clamp(300px, 95%, 500px);
+        padding: 50px 20px;
+        gap: 20px;
+
+        background-color: var(--terceary-color);
+        border: none;
+        border-radius: 1rem;
         margin-top: 50px;
-    width: clamp(0px, 100vw, 100vw);
-    background: linear-gradient(to top,
-    var(--secondary-color) 0%,
-    var(--terceary-color) 100%);
-}
+        z-index: 1;
+    }
+
+    .form_group {
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: flex-start;
+        width: 100%
+    }
+
+    .form_group label {
+        color: var(--quaternary-color);
+        font-size: 1.5rem;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+
+    .form_group input {
+        font-size: 1rem;
+        font-weight: lighter;
+        background-color: transparent;
+        border: solid 2px var(--quaternary-color);
+        color: white;
+        padding: 5px 5px;
+        border-radius: 7px;
+        width: 100%;
+        transition: all 0.2s ease-out;
+        outline: none;
+
+    }
+
+    .form_group input:focus {
+        border: solid 2px var(--primary-color);
+    }

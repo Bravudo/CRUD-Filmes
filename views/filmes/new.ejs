@@ -5,22 +5,23 @@
         <%= error %>
     </div>
 <% } %>
-
-<form action="/filmes" method="POST">
-    <div class="form-group">
-        <label for="titulo">Título:</label>
+<div class="wrapper_content_container">
+    
+<form action="/filmes" method="POST" class="form_new_movie">
+    <div class="form_group">
+        <label for="titulo">Título</label>
         <input type="text" id="titulo" name="titulo" 
                value="<%= typeof filme !== 'undefined' ? filme.titulo : '' %>" required>
     </div>
     
-    <div class="form-group">
-        <label for="diretor">Diretor:</label>
+    <div class="form_group">
+        <label for="diretor">Diretor</label>
         <input type="text" id="diretor" name="diretor" 
                value="<%= typeof filme !== 'undefined' ? filme.diretor : '' %>">
     </div>
     
-    <div class="form-group">
-        <label for="ano">Ano de Lançamento:</label>
+    <div class="form_group">
+        <label for="ano">Ano de Lançamento</label>
         <input type="number" id="ano" name="anoLancamento" 
                value="<%= typeof filme !== 'undefined' ? filme.anoLancamento : '' %>">
     </div>
@@ -30,3 +31,4 @@
         <a href="/filmes" class="btn">Cancelar</a>
     </div>
 </form>
+ </div>
