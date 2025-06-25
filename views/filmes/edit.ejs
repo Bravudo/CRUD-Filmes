@@ -1,28 +1,23 @@
-<form action="/filmes/<%= filme._id %>?_method=PUT" method="POST">
-  <div class="mb-3">
-    <label for="titulo" class="form-label">Título</label>
-    <input type="text" class="form-control" id="titulo" name="titulo" value="<%= filme.titulo %>" required>
-  </div>
-  
-  <div class="mb-3">
-    <label for="descricao" class="form-label">Descrição</label>
-    <textarea class="form-control" id="descricao" name="descricao" rows="3" required><%= filme.descricao %></textarea>
-  </div>
-  
-  <div class="row">
-    <div class="col-md-6 mb-3">
-      <label for="diretor" class="form-label">Diretor</label>
-      <input type="text" class="form-control" id="diretor" name="diretor" value="<%= filme.diretor %>">
-    </div>
-    
-    <div class="col-md-6 mb-3">
-      <label for="anoLancamento" class="form-label">Ano de Lançamento</label>
-      <input type="number" class="form-control" id="anoLancamento" name="anoLancamento" value="<%= filme.anoLancamento %>">
-    </div>
-  </div>
-  
-  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-    <a href="/filmes/<%= filme._id %>" class="btn btn-secondary me-md-2">Cancelar</a>
-    <button type="submit" class="btn btn-primary">Atualizar</button>
-  </div>
-</form>
+<h1><%= title %></h1>
+
+<% if (filmes.length === 0) { %>
+  <p>Nenhum filme encontrado.</p>
+<% } else { %>
+  <ul class="filmes_lista">
+    <% filmes.forEach(filme => { %>
+      <li class="filme_card">
+        <h2><%= filme.titulo %></h2>
+        <p><strong>Diretor:</strong> <%= filme.diretor %></p>
+        <p><strong>Ano:</strong> <%= filme.anoLancamento %></p>
+
+        <div class="botoes_filme">
+          <a href="/filmes/<%= filme._id %>/edit" class="btn">Editar</a>
+
+          <form action="/filmes/<%= filme._id %>?_method=DELETE" method="POST" style="display:inline;">
+            <button type="submit" class="btn btn-delete" onclick="return confirm('Deseja excluir este filme?')">Excluir</button>
+          </form>
+        </div>
+      </li>
+    <% }) %>
+  </ul>
+<% } %>

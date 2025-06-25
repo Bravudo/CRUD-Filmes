@@ -46,22 +46,6 @@ app.use((err, req, res, next) => {
     error: process.env.NODE_ENV === 'development' ? err.stack : 'Erro no servidor'
   });
 });
-// Middleware para erros 404 (não encontrado)
-app.use((req, res, next) => {
-    res.status(404).render('error', {
-        title: 'Página não encontrada',
-        error: 'A URL solicitada não existe'
-    });
-});
-
-// Middleware para erros 500 (erro interno)
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).render('error', {
-        title: 'Erro interno no servidor',
-        error: process.env.NODE_ENV === 'development' ? err.stack : 'Ocorreu um erro inesperado'
-    });
-});
 
 // Iniciar servidor
 const PORT = process.env.PORT || 3000;

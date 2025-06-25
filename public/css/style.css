@@ -58,6 +58,7 @@
         max-width: 2000px;
         padding: 5px 20px;
         background-color: var(--secondary-color);
+        background-color: transparent;
         left: 50%;
         transform: translateX(-50%); /* Ajusta para o centro */
     
@@ -239,7 +240,10 @@
         gap: 5px;
         font-size: 0.1rem;
     }
-
+    .form-test{
+        width: 100%;
+        background-color: red;
+    }
     .genre-label{
         position: relative;
         display: flex;

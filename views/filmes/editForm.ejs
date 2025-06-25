@@ -1,0 +1,48 @@
+<h1><%= title %></h1>
+
+<form action="/filmes/<%= filme._id %>?_method=PUT" method="POST">
+  <div>
+    <label>Título:</label>
+    <input type="text" name="titulo" value="<%= filme.titulo %>" required />
+  </div>
+
+  <div>
+    <label>Descrição:</label>
+    <textarea name="descricao"><%= filme.descricao %></textarea>
+  </div>
+
+  <div>
+    <label>Diretor:</label>
+    <input type="text" name="diretor" value="<%= filme.diretor %>" />
+  </div>
+
+  <div>
+    <label>Gênero:</label>
+    <input type="text" name="genero" value="<%= Array.isArray(filme.genero) ? filme.genero.join(', ') : filme.genero %>" />
+  </div>
+
+  <div>
+    <label>Elenco:</label>
+    <input type="text" name="elenco" value="<%= filme.elenco.join(', ') %>" />
+  </div>
+
+  <div>
+    <label>Duração:</label>
+    <input type="text" name="duracao" value="<%= filme.duracao %>" />
+  </div>
+
+  <div>
+    <label>Ano de Lançamento:</label>
+    <input type="number" name="anoLancamento" value="<%= filme.anoLancamento %>" />
+  </div>
+
+  <div>
+    <label>Classificação:</label>
+    <input type="text" name="classificacao" value="<%= filme.classificacao %>" />
+  </div>
+
+  <div>
+    <button type="submit">Salvar Alterações</button>
+    <a href="/filmes/edit">Cancelar</a>
+  </div>
+</form>
