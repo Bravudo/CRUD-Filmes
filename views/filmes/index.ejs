@@ -1,5 +1,39 @@
-
 <div class="wrapper_content_container">
-
     <h1>Filmes em Cartaz</h1>
-</div>
+    
+    
+    <div class="wrapper_movie_cards_container">
+        <% if (filmes.length === 0) { %>
+            <div class="alert alert-info">
+                Nenhum filme cadastrado ainda. <a href="/filmes/new">Adicione o primeiro!</a>
+            </div>
+            <% } else { %>
+                    <% filmes.forEach(filme => { %>
+
+                                <!-- Você pode adicionar uma imagem aqui -->
+                                <div class="movie_card_container">
+                                    <h5 class="card-title"><%= filme.titulo %></h5>
+                                    <p class="card-text text-muted">
+                                        <small>
+                                            <%= filme.anoLancamento %> • 
+                                            <%= filme.duracao %> min • 
+                                            <%= filme.classificacao %>
+                                        </small>
+                                    </p>
+                                    <% if (filme.descricao) { %>
+                                        <p class="card-text"><%= filme.descricao.substring(0, 100) %>...</p>
+                                        <% } %>
+                                        <div class="mb-2">
+                                            <% filme.genero.forEach(g => { %>
+                                                <span class="badge bg-secondary me-1"><%= g %></span>
+                                                <% }); %>
+                                            </div>
+                                        </div>
+                                        
+                   
+                        
+                            <% }); %>
+                        </div>
+                        <% } %>
+                    </div>
+                </div>

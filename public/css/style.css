@@ -131,9 +131,11 @@
         align-items: center;
         justify-content: center;
         position: relative;
+        flex-direction: column;
         margin: 0 auto;
         width: clamp(0px, 100vw, var(--wrapper-max-width));
         max-width: 2000px;
+        gap: 20px;
        
         z-index: 1; /*Não tirar. Pode entrar em conflito com o header*/
         color: var(--quaternary-color);
@@ -311,3 +313,34 @@
             height: 100%;
         }
     }
+
+
+
+    /*Página Inicial dos Filmes*/
+
+   .wrapper_movie_cards_container{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 40px;
+
+    
+}
+
+.movie_card_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: clamp(100px, 100% , 400px);
+    height:100%;
+    padding: 0px 20px;
+    padding-bottom: 15px;
+
+    overflow: hidden;
+    background-color: var(--secondary-color);
+
+    border-radius: 5px;
+}

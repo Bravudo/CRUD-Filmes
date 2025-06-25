@@ -1,4 +1,5 @@
 const express = require('express');
+const router = express.Router();
 const {
   getFilmes,
   getFilme,
@@ -8,8 +9,6 @@ const {
   newFilme,
   editFilme
 } = require('../controllers/filmeController');
-
-const router = express.Router();
 
 router.route('/')
   .get(getFilmes)

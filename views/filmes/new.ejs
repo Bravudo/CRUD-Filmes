@@ -69,15 +69,6 @@
                    value="<%= filme && filme.duracao ? filme.duracao : '' %>" required>
         </div>
         
-        <!-- Elenco -->
-        <div class="form_group">
-            <label for="elenco">Elenco (separado por vírgulas)</label>
-            <input type="text" id="elenco" name="elenco" 
-                   value="<%= filme && filme.elenco ? 
-                           (Array.isArray(filme.elenco) ? filme.elenco.join(', ') : filme.elenco) : 
-                           '' %>" required>
-        </div>
-        
         <!-- Classificação -->
         <div class="form_group">
             <label for="classificacao">Classificação</label>

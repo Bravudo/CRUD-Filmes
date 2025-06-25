@@ -2,45 +2,67 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const filmesRoutes = require('./routes/filmeRoutes');
-const cors = require('cors');
 const path = require('path');
+const methodOverride = require('method-override');
+const expressLayouts = require('express-ejs-layouts');
 
 const app = express();
 
-// Middleware
-app.use(express.json());
-app.use(cors());
-app.use(express.urlencoded({ extended: true }));
+// Conexão com MongoDB
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log('Conectado ao MongoDB'))
+  .catch(err => console.error('Erro MongoDB:', err));
 
-// Configuração do EJS e layouts
-const expressLayouts = require('express-ejs-layouts');
+// Middlewares
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
+app.use(express.static(path.join(__dirname, 'public')));
+
+// EJS Configuration
 app.use(expressLayouts);
 app.set('layout', './layouts/main');
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
-app.use(express.static(path.join(__dirname, 'public')));
 
 // Rotas
 app.use('/filmes', filmesRoutes);
 
 // Rota inicial
-app.get('/', (req, res) => {
-    res.redirect('/filmes');
+app.get('/', (req, res) => res.redirect('/filmes'));
+
+// Error Handling
+app.use((req, res) => {
+  res.status(404).render('error', {
+    title: 'Página não encontrada',
+    error: 'Recurso não encontrado'
+  });
 });
 
-// Conexão com o banco de dados
-mongoose.connect(process.env.MONGO_URI)
-    .then(() => {
-        console.log('MongoDB conectado');
-        const PORT = process.env.PORT || 3000;
-        app.listen(PORT, () => {
-            console.log(`Servidor rodando na porta ${PORT}`);
-        });
-    })
-    .catch(err => {
-        console.error('Erro ao conectar ao MongoDB:', err);
-        process.exit(1);
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).render('error', {
+    title: 'Erro interno',
+    error: process.env.NODE_ENV === 'development' ? err.stack : 'Erro no servidor'
+  });
+});
+// Middleware para erros 404 (não encontrado)
+app.use((req, res, next) => {
+    res.status(404).render('error', {
+        title: 'Página não encontrada',
+        error: 'A URL solicitada não existe'
     });
+});
 
+// Middleware para erros 500 (erro interno)
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).render('error', {
+        title: 'Erro interno no servidor',
+        error: process.env.NODE_ENV === 'development' ? err.stack : 'Ocorreu um erro inesperado'
+    });
+});
 
-module.exports = app;
+// Iniciar servidor
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
