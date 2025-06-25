@@ -57,7 +57,7 @@ exports.editFilmeForm = async (req, res) => {
     }
 
     res.render('filmes/editForm', {
-      title: `Editar: ${filme.titulo}`,
+      title: `${filme.titulo}`,
       filme
     });
   } catch (err) {
@@ -90,7 +90,7 @@ exports.getFilme = async (req, res) => {
       });
     }
 
-    res.render('filmes/show', {
+    res.render('filmes/index', {
       title: filme.titulo,
       filme
     });
@@ -116,7 +116,7 @@ exports.newFilme = (req, res) => {
 exports.createFilme = async (req, res) => {
   try {
     const filme = await Filme.create(req.body);
-    res.redirect(`/filmes/${filme._id}`);
+    res.redirect(`/filmes`);
   } catch (err) {
     res.render('filmes/new', {
       title: 'Adicionar Filme - Erro',

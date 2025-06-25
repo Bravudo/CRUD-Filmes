@@ -1,23 +1,27 @@
-<h1><%= title %></h1>
+<div class="wrapper_movie_content_container">
 
-<% if (filmes.length === 0) { %>
-  <p>Nenhum filme encontrado.</p>
-<% } else { %>
-  <ul class="filmes_lista">
-    <% filmes.forEach(filme => { %>
-      <li class="filme_card">
-        <h2><%= filme.titulo %></h2>
-        <p><strong>Diretor:</strong> <%= filme.diretor %></p>
-        <p><strong>Ano:</strong> <%= filme.anoLancamento %></p>
-
-        <div class="botoes_filme">
+  <h1><%= title %></h1>
+  
+  <% if (filmes.length === 0) { %>
+    <p>Nenhum filme encontrado.</p>
+    <% } else { %>
+      <ul class="movie_list_container">
+        <% filmes.forEach(filme => { %>
+          <li class="movie_card">
+            <h2><%= filme.titulo %></h2>
+            <p><strong>Diretor:</strong> <%= filme.diretor %></p>
+            <p><strong>Ano:</strong> <%= filme.anoLancamento %></p>
+            
+            <div class="movie_btns">
           <a href="/filmes/<%= filme._id %>/edit" class="btn">Editar</a>
-
+          
           <form action="/filmes/<%= filme._id %>?_method=DELETE" method="POST" style="display:inline;">
-            <button type="submit" class="btn btn-delete" onclick="return confirm('Deseja excluir este filme?')">Excluir</button>
+            <button type="submit" class="movie_delete_btn" onclick="return confirm('Deseja excluir este filme?')">Excluir</button>
           </form>
         </div>
       </li>
-    <% }) %>
+      <% }) %>
   </ul>
 <% } %>
+
+</div>

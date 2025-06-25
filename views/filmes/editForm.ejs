@@ -1,48 +1,104 @@
-<h1><%= title %></h1>
-
-<form action="/filmes/<%= filme._id %>?_method=PUT" method="POST">
-  <div>
-    <label>Título:</label>
-    <input type="text" name="titulo" value="<%= filme.titulo %>" required />
+<% if (typeof error !== 'undefined') { %>
+  <div class="alert alert-error">
+    <%= error %>
   </div>
+<% } %>
 
-  <div>
-    <label>Descrição:</label>
-    <textarea name="descricao"><%= filme.descricao %></textarea>
-  </div>
+<div class="wrapper_content_container">
+  <form method="POST" action="/filmes/<%= filme._id %>?_method=PUT" class="form_new_movie">
+    
+    <!-- Título -->
+    <div class="form_title">
+      <h1><%= title %></h1>
+    </div>
 
-  <div>
-    <label>Diretor:</label>
-    <input type="text" name="diretor" value="<%= filme.diretor %>" />
-  </div>
+    <div class="form_group">
+      <label for="titulo">Título</label>
+      <input type="text" id="titulo" name="titulo" value="<%= filme.titulo %>" required />
+    </div>
 
-  <div>
-    <label>Gênero:</label>
-    <input type="text" name="genero" value="<%= Array.isArray(filme.genero) ? filme.genero.join(', ') : filme.genero %>" />
-  </div>
+    <!-- Descrição -->
+    <div class="form_group">
+      <label for="descricao">Descrição</label>
+      <textarea id="descricao" name="descricao" required><%= filme.descricao %></textarea>
+    </div>
 
-  <div>
-    <label>Elenco:</label>
-    <input type="text" name="elenco" value="<%= filme.elenco.join(', ') %>" />
-  </div>
+    <!-- Diretor -->
+    <div class="form_group">
+      <label for="diretor">Diretor</label>
+      <input type="text" id="diretor" name="diretor" value="<%= filme.diretor %>" required />
+    </div>
 
-  <div>
-    <label>Duração:</label>
-    <input type="text" name="duracao" value="<%= filme.duracao %>" />
-  </div>
+    <!-- Gêneros -->
+    <div class="form_group">
+      <label>Gêneros</label>
+      <div class="genre-options">
+        <%
+          const generos = ['Ação', 'Comédia', 'Drama', 'Ficção', 'Terror', 'Romance', 'Animação'];
+          const selectedGeneros = filme && filme.genero ? 
+            (Array.isArray(filme.genero) ? filme.genero : [filme.genero]) : [];
+        %>
 
-  <div>
-    <label>Ano de Lançamento:</label>
-    <input type="number" name="anoLancamento" value="<%= filme.anoLancamento %>" />
-  </div>
+        <% generos.forEach(genero => { %>
+          <label class="genre-label">
+            <input type="checkbox" 
+                   name="genero" 
+                   value="<%= genero %>" 
+                   <%= selectedGeneros.includes(genero) ? 'checked' : '' %> />
+            <%= genero %>
+            <div class="genre-background-label"></div>
+          </label>
+        <% }); %>
+      </div>
+    </div>
 
-  <div>
-    <label>Classificação:</label>
-    <input type="text" name="classificacao" value="<%= filme.classificacao %>" />
-  </div>
+    <!-- Elenco -->
+    <div class="form_group">
+      <label for="elenco">Elenco (separado por vírgula)</label>
+      <input type="text" id="elenco" name="elenco" value="<%= filme.elenco.join(', ') %>" />
+    </div>
 
-  <div>
-    <button type="submit">Salvar Alterações</button>
-    <a href="/filmes/edit">Cancelar</a>
-  </div>
-</form>
+    <!-- Duração -->
+    <div class="form_group">
+      <label for="duracao">Duração (minutos)</label>
+      <input type="number" id="duracao" name="duracao" value="<%= filme.duracao %>" required />
+    </div>
+
+    <!-- Ano -->
+    <div class="form_group">
+      <label for="anoLancamento">Ano de Lançamento</label>
+      <input type="number" id="anoLancamento" name="anoLancamento" value="<%= filme.anoLancamento %>" required />
+    </div>
+
+    <!-- Classificação -->
+    <div class="form_group">
+      <label for="classificacao">Classificação</label>
+      <select id="classificacao" name="classificacao" required>
+        <%
+          const classificacoes = [
+            { value: 'L', label: 'Livre' },
+            { value: '10', label: '10+' },
+            { value: '12', label: '12+' },
+            { value: '14', label: '14+' },
+            { value: '16', label: '16+' },
+            { value: '18', label: '18+' }
+          ];
+          const currentClassificacao = filme.classificacao;
+        %>
+
+        <% classificacoes.forEach(item => { %>
+          <option value="<%= item.value %>" <%= currentClassificacao === item.value ? 'selected' : '' %>>
+            <%= item.label %>
+          </option>
+        <% }); %>
+      </select>
+    </div>
+
+    <!-- Ações -->
+    <div class="form_actions">
+      <button type="submit" class="btn">Salvar</button>
+      <a href="/filmes/edit" class="btn">Cancelar</a>
+    </div>
+
+  </form>
+</div>

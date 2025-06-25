@@ -58,7 +58,6 @@
         max-width: 2000px;
         padding: 5px 20px;
         background-color: var(--secondary-color);
-        background-color: transparent;
         left: 50%;
         transform: translateX(-50%); /* Ajusta para o centro */
     
@@ -143,6 +142,7 @@
         padding-top: 50px;
         padding-bottom: 100px;
     }
+
 
 
 
@@ -275,6 +275,93 @@
             animation: background-label 0.15s ease-in-out forwards;
         }   
     }
+
+/************************************/
+    
+       /*Edit wrapper*/
+    .wrapper_movie_content_container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        flex-direction: column;
+        margin: 0 auto;
+        width: clamp(0px, 100vw, var(--wrapper-max-width));
+        max-width: 2000px;
+        gap: 20px;
+       
+        z-index: 1; /*Não tirar. Pode entrar em conflito com o header*/
+        color: var(--primary-color);
+        padding-top: 100px;
+        padding-bottom: 100px;
+    }
+
+
+    /*Lista de Edits Filme*/
+    .movie_list_container{
+        display: grid;
+        grid-template-columns: repeat(3, 2fr);
+        justify-items: center;
+        align-items: center;
+        align-content: center;
+        width: 70%;
+        gap: 10px;
+        margin: 0 auto;
+   
+    }
+
+    .movie_card{
+        display: flex;
+        flex-direction: column;
+    
+        word-wrap: break-word;
+        gap: 5px;
+        
+        width: clamp(200px, 100%, 400px);
+        height: clamp(100px, 100%, 600px);
+        
+        padding: 10px 30px;
+        background-color: var(--secondary-color);
+        border-radius: 5px 20px;
+        box-shadow: 0px 2px 20px var(--secondary-color);
+
+    }
+
+    .movie_card h2{
+        color: var(--primary-color);
+        font-size: 1.5rem;
+    }
+    .movie_card p{
+        color: var(--quaternary-color);
+    }
+
+    .movie_btns{
+        display: flex;
+        gap: 5px;
+    }
+    .movie_btns a{
+        color: var(--secondary-color);
+        text-decoration: none;
+        padding: 5px;
+        font-size: 1.1rem;
+        background-color: #ffdb89;
+        border-radius: 5px;
+    }
+    
+    .movie_btns form{
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .movie_delete_btn{
+        cursor: pointer;
+        width: 100%;
+        height: 100%;
+        font-size: 1.1rem;
+        border: none;
+        border-radius: 5px;
+    }
+
 
    @keyframes background-label {
     0% {
