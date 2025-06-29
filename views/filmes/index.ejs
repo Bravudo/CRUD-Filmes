@@ -9,10 +9,9 @@
             </div>
             <% } else { %>
                     <% filmes.forEach(filme => { %>
-
                                 <!-- Você pode adicionar uma imagem aqui -->
                                 <div class="movie_card_container">
-                                    <h5 class="card-title"><%= filme.titulo %></h5>
+                                    <h5 class="movie_card_title"><%= filme.titulo %></h5>
                                     <p class="card-text text-muted">
                                         <small>
                                             <%= filme.anoLancamento %> • 
